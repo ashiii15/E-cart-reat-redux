@@ -1,9 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCartList } from "../Redux/cartSlice";
 
 function Cart() {
   const carts = useSelector((state) => state.cartReducer);
-  console.log(carts);
+  const dispatch = useDispatch()
+const removeCart= (id)=>{
+dispatch(removeFromCartList(id))
+}
+  // console.log(carts);
   return (
     <div style={{ marginTop: "5rem" }}>
       {carts.length > 0 ? (
@@ -31,7 +36,7 @@ function Cart() {
                   </td>
                   <td>{cart.price}</td>
                   <td>
-                    <button>
+                    <button onClick={()=>removeCart(cart.id)}>
                       <i
                         className="fa-solid fa-trash"
                         style={{ color: "#e00b20" }}
